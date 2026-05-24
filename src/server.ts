@@ -1,10 +1,9 @@
 import app from "./app";
 import config from "./config";
-import { initIssuesDB, initUsersDB } from "./db";
+import { initDB } from "./db";
 
 const main = () => {
-  initUsersDB();
-  initIssuesDB();
+  initDB();
   app.listen(config.port, () => {
     console.log(`DevPulse app listening on port ${config.port}`);
   });

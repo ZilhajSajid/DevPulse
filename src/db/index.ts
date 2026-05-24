@@ -5,7 +5,7 @@ export const pool = new Pool({
   connectionString: config.connection_string,
 });
 
-export const initUsersDB = async () => {
+export const initDB = async () => {
   try {
     await pool.query(`
         CREATE TABLE IF NOT EXISTS users (
@@ -17,14 +17,7 @@ export const initUsersDB = async () => {
         created_at TIMESTAMP DEFAULT NOW(),
         updated_at TIMESTAMP DEFAULT NOW()
         )`);
-    // console.log("Table created");
-  } catch (error) {
-    console.log(error);
-  }
-};
 
-export const initIssuesDB = async () => {
-  try {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS issues (
       id SERIAL PRIMARY KEY,

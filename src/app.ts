@@ -4,7 +4,6 @@ import express, {
   type Response,
 } from "express";
 
-import { pool } from "./db";
 import { userRoute } from "./modules/user/user.routes";
 import { issuesRoute } from "./modules/issues/issues.route";
 const app: Application = express();
