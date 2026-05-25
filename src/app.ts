@@ -4,8 +4,8 @@ import express, {
   type Response,
 } from "express";
 
-import { userRoute } from "./modules/user/user.routes";
 import { issuesRoute } from "./modules/issues/issues.route";
+import { authRoute } from "./modules/auth/auth.route";
 const app: Application = express();
 
 app.use(express.json());
@@ -18,7 +18,8 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-app.use("/api/auth/signup", userRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/auth", authRoute);
 app.use("/api/issues", issuesRoute);
 app.use("/api/issues", issuesRoute);
 export default app;

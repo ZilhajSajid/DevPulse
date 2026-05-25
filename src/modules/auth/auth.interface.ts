@@ -4,3 +4,8 @@ export interface IUser {
   password: string;
   role: string;
 }
+
+export interface ILoginPayload {
+  email: string;
+  password: string;
+}
