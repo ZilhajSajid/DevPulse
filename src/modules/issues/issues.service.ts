@@ -19,12 +19,67 @@ const createIssuesIntoDB = async (payload: any) => {
 };
 
 const getAllIssuesFromDB = async () => {
-  const result = await pool.query(`
+  const issuesResult = await pool.query(`
     SELECT * FROM issues`);
-  return result;
+  const issue = issuesResult.rows[0];
+
+  const reporterResult = await pool.query(
+    `
+    SELECT id,name,role FROM users WHERE id=$1`,
+    [issue.reporter_id],
+  );
+  const reporter = reporterResult.rows[0];
+  return {
+    id: issue.id,
+    title: issue.title,
+    description: issue.description,
+    type: issue.type,
+    status: issue.status,
+    reporter: {
+      id: reporter.id,
+      name: reporter.name,
+      role: reporter.role,
+    },
+    created_at: issue.created_at,
+    updated_at: issue.updated_at,
+  };
+};
+
+const getSingleIssueFromDB = async (id: string) => {
+  const issueResult = await pool.query(
+    `
+    SELECT * FROM issues WHERE id=$1 `,
+    [id],
+  );
+  const issue = issueResult.rows[0];
+
+  const reporterResult = await pool.query(
+    `
+  SELECT id,name,role FROM users WHERE id=$1`,
+    [issue.reporter_id],
+  );
+  const reporter = reporterResult.rows[0];
+
+  return {
+    id: issue.id,
+    title: issue.title,
+    description: issue.description,
+    type: issue.type,
+    status: issue.status,
+
+    reporter: {
+      id: reporter.id,
+      name: reporter.name,
+      role: reporter.role,
+    },
+
+    created_at: issue.created_at,
+    updated_at: issue.updated_at,
+  };
 };
 
 export const issuesService = {
   createIssuesIntoDB,
   getAllIssuesFromDB,
+  getSingleIssueFromDB,
 };
