@@ -3,12 +3,20 @@ import { issuesService } from "./issues.service";
 
 const createIssues = async (req: Request, res: Response) => {
   const { title, description, type } = req.body;
+
+  const reporter_id = req.user.id;
+  const payload = {
+    title,
+    description,
+    type,
+    reporter_id,
+  };
   try {
-    const result = await issuesService.createIssuesIntoDB(req.body);
+    const result = await issuesService.createIssuesIntoDB(payload);
     res.status(201).json({
       success: true,
       message: "Issue created successfully",
-      data: result.rows[0],
+      data: result,
     });
   } catch (error: any) {
     res.status(500).json({

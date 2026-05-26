@@ -9,7 +9,7 @@ const createUserIntoDB = async (payload: IUser) => {
   const hashPassword = await bcrypt.hashSync(password, 10);
   const result = await pool.query(
     `
-    INSERT INTO users (name,email,password,role) VALUES($1,$2,$3,$4)
+    INSERT INTO users (name,email,password,role) VALUES($1,$2,$3,COALESCE($4,'contributor'))
     RETURNING *`,
     [name, email, hashPassword, role],
   );
@@ -28,24 +28,25 @@ const loginUserToDB = async (payload: ILoginPayload) => {
   if (userExists.rows.length === 0) {
     throw new Error("Invalid Credentials!");
   }
-  const user = userExists.rows[0];
+  const userResult = userExists.rows[0];
   // 2 Matching password
-  const matchPassword = await bcrypt.compare(password, user.password);
+  const matchPassword = await bcrypt.compare(password, userResult.password);
 
   if (!matchPassword) {
     throw new Error("Invalid Credentials!");
   }
   // 3 Generate token
   const jwtPayload = {
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    role: user.role,
+    id: userResult.id,
+    name: userResult.name,
+    role: userResult.role,
   };
-  const accessToken = jwt.sign(jwtPayload, config.jwt_secret as string, {
+  const token = jwt.sign(jwtPayload, config.jwt_secret as string, {
     expiresIn: "1d",
   });
-  return { accessToken };
+  const { password: _, ...user } = userResult;
+
+  return { token, user };
 };
 
 export const authService = { createUserIntoDB, loginUserToDB };

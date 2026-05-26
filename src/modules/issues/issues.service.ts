@@ -11,11 +11,22 @@ const createIssuesIntoDB = async (payload: any) => {
   if (user.rows.length === 0) {
     throw new Error("User Not Exists!");
   }
+
   const result = await pool.query(
     `INSERT INTO issues(title, description, type, reporter_id) VALUES($1,$2,$3,$4) RETURNING *`,
     [title, description, type, reporter_id],
   );
-  return result;
+  const issue = result.rows[0];
+
+  return {
+    id: issue.id,
+    title: issue.title,
+    description: issue.description,
+    type: issue.type,
+    status: issue.status,
+    created_at: issue.created_at,
+    updated_at: issue.updated_at,
+  };
 };
 
 const getAllIssuesFromDB = async () => {

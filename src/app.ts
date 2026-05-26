@@ -6,10 +6,13 @@ import express, {
 
 import { issuesRoute } from "./modules/issues/issues.route";
 import { authRoute } from "./modules/auth/auth.route";
+import logger from "./middleware/logger";
+
 const app: Application = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(logger);
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({
