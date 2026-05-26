@@ -53,12 +53,10 @@ const getAllIssuesFromDB = async (query: any) => {
   const issuesResult = await pool.query(sql, values);
   const issues = issuesResult.rows;
 
-  // reporter ids
   const reporterIds = issues.map((issue) => issue.reporter_id);
 
   const uniqueIds = [...new Set(reporterIds)];
 
-  // fetch users
   const usersResult = await pool.query(
     `
       SELECT id, name, role
@@ -68,7 +66,6 @@ const getAllIssuesFromDB = async (query: any) => {
     [uniqueIds],
   );
 
-  // merge data
   const formattedIssues = issues.map((issue) => {
     const reporter = usersResult.rows.find(
       (user) => user.id === issue.reporter_id,
@@ -102,7 +99,7 @@ const getSingleIssueFromDB = async (id: string) => {
     [id],
   );
   const issue = issueResult.rows[0];
-
+  if (!issue) return null;
   const reporterResult = await pool.query(
     `
   SELECT id,name,role FROM users WHERE id=$1`,

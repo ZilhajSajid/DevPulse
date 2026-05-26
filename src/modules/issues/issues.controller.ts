@@ -47,8 +47,21 @@ const getAllIssues = async (req: Request, res: Response) => {
 
 const getSingleIssue = async (req: Request, res: Response) => {
   const { id } = req.params;
+  if (isNaN(Number(id))) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid issue id",
+    });
+  }
+
   try {
     const result = await issuesService.getSingleIssueFromDB(id as string);
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: "No Issue Found",
+      });
+    }
 
     res.status(200).json({
       success: true,
