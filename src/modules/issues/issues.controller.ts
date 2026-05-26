@@ -28,13 +28,21 @@ const createIssues = async (req: Request, res: Response) => {
 };
 
 const getAllIssues = async (req: Request, res: Response) => {
-  const { sort = "newest", type, status } = req.query;
-  const result = await issuesService.getAllIssuesFromDB();
+  try {
+    const result = await issuesService.getAllIssuesFromDB(req.query);
 
-  res.status(200).json({
-    success: true,
-    data: result,
-  });
+    res.status(200).json({
+      success: true,
+      message: "Issues retrieved successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      data: error,
+    });
+  }
 };
 
 const getSingleIssue = async (req: Request, res: Response) => {

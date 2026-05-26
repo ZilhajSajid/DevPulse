@@ -29,31 +29,70 @@ const createIssuesIntoDB = async (payload: any) => {
   };
 };
 
-const getAllIssuesFromDB = async () => {
-  const issuesResult = await pool.query(`
-    SELECT * FROM issues`);
-  const issue = issuesResult.rows[0];
+const getAllIssuesFromDB = async (query: any) => {
+  const { sort = "newest", type, status } = query;
+  let sql = `SELECT * FROM issues`;
+  const conditions: string[] = [];
+  const values: string[] = [];
+  if (type) {
+    conditions.push(`type = $${values.length + 1}`);
+    values.push(type as string);
+  }
+  if (status) {
+    conditions.push(`status = $${values.length + 1}`);
+    values.push(status as string);
+  }
+  if (conditions.length > 0) {
+    sql += ` WHERE ${conditions.join(" AND ")}`;
+  }
+  if (sort === "oldest") {
+    sql += ` ORDER BY created_at ASC`;
+  } else {
+    sql += ` ORDER BY created_at DESC`;
+  }
+  const issuesResult = await pool.query(sql, values);
+  const issues = issuesResult.rows;
 
-  const reporterResult = await pool.query(
+  // reporter ids
+  const reporterIds = issues.map((issue) => issue.reporter_id);
+
+  const uniqueIds = [...new Set(reporterIds)];
+
+  // fetch users
+  const usersResult = await pool.query(
     `
-    SELECT id,name,role FROM users WHERE id=$1`,
-    [issue.reporter_id],
+      SELECT id, name, role
+      FROM users
+      WHERE id = ANY($1)
+    `,
+    [uniqueIds],
   );
-  const reporter = reporterResult.rows[0];
-  return {
-    id: issue.id,
-    title: issue.title,
-    description: issue.description,
-    type: issue.type,
-    status: issue.status,
-    reporter: {
-      id: reporter.id,
-      name: reporter.name,
-      role: reporter.role,
-    },
-    created_at: issue.created_at,
-    updated_at: issue.updated_at,
-  };
+
+  // merge data
+  const formattedIssues = issues.map((issue) => {
+    const reporter = usersResult.rows.find(
+      (user) => user.id === issue.reporter_id,
+    );
+
+    return {
+      id: issue.id,
+      title: issue.title,
+      description: issue.description,
+      type: issue.type,
+      status: issue.status,
+
+      reporter: {
+        id: reporter?.id,
+        name: reporter?.name,
+        role: reporter?.role,
+      },
+
+      created_at: issue.created_at,
+      updated_at: issue.updated_at,
+    };
+  });
+
+  return formattedIssues;
 };
 
 const getSingleIssueFromDB = async (id: string) => {
