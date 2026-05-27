@@ -232,3 +232,83 @@ Method -> GET - Time -> 5/26/2026, 10:00:02 PM - URL -> /api/issues/2
 Method -> GET - Time -> 5/26/2026, 10:01:53 PM - URL -> /api/issues/3
 
 Method -> GET - Time -> 5/26/2026, 10:04:28 PM - URL -> /api/issues/3
+
+Method -> PATCH - Time -> 5/26/2026, 10:10:16 PM - URL -> /api/issues/1
+
+Method -> PATCH - Time -> 5/26/2026, 10:12:15 PM - URL -> /api/issues/1
+
+Method -> GET - Time -> 5/27/2026, 11:03:06 AM - URL -> /
+
+Method -> GET - Time -> 5/27/2026, 11:03:07 AM - URL -> /favicon.ico
+
+Method -> GET - Time -> 5/27/2026, 11:03:08 AM - URL -> /
+
+Method -> GET - Time -> 5/27/2026, 11:03:24 AM - URL -> /api/issues
+
+Method -> GET - Time -> 5/27/2026, 11:04:00 AM - URL -> /api/issues?sort=newest
+
+Method -> GET - Time -> 5/27/2026, 11:04:10 AM - URL -> /api/issues?sort=oldest
+
+Method -> GET - Time -> 5/27/2026, 11:04:47 AM - URL -> /api/issues?sort=newest
+
+Method -> GET - Time -> 5/27/2026, 11:32:59 AM - URL -> /
+
+Method -> GET - Time -> 5/27/2026, 11:33:00 AM - URL -> /favicon.ico
+
+Method -> GET - Time -> 5/27/2026, 11:33:17 AM - URL -> /api/issues?sort=newest&type=bug
+
+Method -> GET - Time -> 5/27/2026, 11:33:40 AM - URL -> /api/issues?sort=newest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 11:34:42 AM - URL -> /api/issues/2
+
+Method -> PATCH - Time -> 5/27/2026, 11:45:25 AM - URL -> /api/issues/1
+
+Method -> POST - Time -> 5/27/2026, 11:47:07 AM - URL -> /api/auth/login
+
+Method -> PATCH - Time -> 5/27/2026, 11:47:26 AM - URL -> /api/issues/1
+
+Method -> PATCH - Time -> 5/27/2026, 11:50:26 AM - URL -> /api/issues/1
+
+Method -> PATCH - Time -> 5/27/2026, 11:52:43 AM - URL -> /api/issues/3
+
+Method -> PATCH - Time -> 5/27/2026, 11:56:19 AM - URL -> /api/issues/3
+
+Method -> PATCH - Time -> 5/27/2026, 11:56:32 AM - URL -> /api/issues/2
+
+Method -> PATCH - Time -> 5/27/2026, 11:58:05 AM - URL -> /api/issues/2
+
+Method -> PATCH - Time -> 5/27/2026, 11:58:26 AM - URL -> /api/issues/2
+
+Method -> PATCH - Time -> 5/27/2026, 11:59:03 AM - URL -> /api/issues/2
+
+Method -> PATCH - Time -> 5/27/2026, 12:18:29 PM - URL -> /api/issues/2
+
+Method -> PATCH - Time -> 5/27/2026, 12:19:28 PM - URL -> /api/issues/2
+
+Method -> PATCH - Time -> 5/27/2026, 12:19:53 PM - URL -> /api/issues/2
+
+Method -> POST - Time -> 5/27/2026, 12:21:17 PM - URL -> /api/auth/signup
+
+Method -> POST - Time -> 5/27/2026, 12:21:37 PM - URL -> /api/auth/login
+
+Method -> PATCH - Time -> 5/27/2026, 12:22:30 PM - URL -> /api/issues/1
+
+Method -> PATCH - Time -> 5/27/2026, 12:28:38 PM - URL -> /api/issues/1
+
+Method -> PATCH - Time -> 5/27/2026, 12:29:14 PM - URL -> /api/issues/1
+
+Method -> PATCH - Time -> 5/27/2026, 12:31:28 PM - URL -> /api/issues/1
+
+Method -> POST - Time -> 5/27/2026, 12:32:21 PM - URL -> /api/issues
+
+Method -> GET - Time -> 5/27/2026, 12:32:30 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> PATCH - Time -> 5/27/2026, 12:32:47 PM - URL -> /api/issues/3
+
+Method -> GET - Time -> 5/27/2026, 12:33:12 PM - URL -> /api/issues/3
+
+Method -> PATCH - Time -> 5/27/2026, 12:33:33 PM - URL -> /api/issues/3
+
+Method -> PATCH - Time -> 5/27/2026, 12:35:01 PM - URL -> /api/issues/3
+
+Method -> PATCH - Time -> 5/27/2026, 12:35:12 PM - URL -> /api/issues/2

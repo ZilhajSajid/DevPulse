@@ -1,3 +1,4 @@
+import { title } from "process";
 import { pool } from "../../db";
 
 const createIssuesIntoDB = async (payload: any) => {
@@ -125,8 +126,44 @@ const getSingleIssueFromDB = async (id: string) => {
   };
 };
 
+const updateSingleIssueFromDB = async (payload: any, id: string, user: any) => {
+  const issueResult = await pool.query(
+    `
+    SELECT * FROM issues WHERE id=$1`,
+    [id],
+  );
+  if (issueResult.rows.length === 0) {
+    throw new Error("Issue not found");
+  }
+
+  const issue = issueResult.rows[0];
+  if (user.role === "contributor") {
+    if (issue.reporter_id !== user.id) {
+      throw new Error("You can update only your own issues");
+    }
+    if (issue.status !== "open") {
+      throw new Error("You cannot update this issue");
+    }
+  }
+
+  const { title, description, type } = payload;
+  const result = await pool.query(
+    `
+    UPDATE issues SET 
+    title=COALESCE($1,title),
+    description=COALESCE($2,description),
+    type=COALESCE($3,type),
+    updated_at=NOW()
+    WHERE id=$4
+    RETURNING *`,
+    [title, description, type, id],
+  );
+  return result.rows[0];
+};
+
 export const issuesService = {
   createIssuesIntoDB,
   getAllIssuesFromDB,
   getSingleIssueFromDB,
+  updateSingleIssueFromDB,
 };
