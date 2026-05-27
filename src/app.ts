@@ -27,4 +27,5 @@ app.use("/api/issues", issuesRoute);
 app.use("/api/issues", issuesRoute);
 app.use("/api/issues", issuesRoute);
 app.use("api/issues", issuesRoute);
+app.use("/api/issues", issuesRoute);
 export default app;

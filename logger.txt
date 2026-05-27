@@ -312,3 +312,19 @@ Method -> PATCH - Time -> 5/27/2026, 12:33:33 PM - URL -> /api/issues/3
 Method -> PATCH - Time -> 5/27/2026, 12:35:01 PM - URL -> /api/issues/3
 
 Method -> PATCH - Time -> 5/27/2026, 12:35:12 PM - URL -> /api/issues/2
+
+Method -> PATCH - Time -> 5/27/2026, 12:44:48 PM - URL -> /api/issues/9
+
+Method -> DELETE - Time -> 5/27/2026, 12:45:42 PM - URL -> /api/issues/1
+
+Method -> DELETE - Time -> 5/27/2026, 12:46:22 PM - URL -> /api/issues/1
+
+Method -> DELETE - Time -> 5/27/2026, 12:46:45 PM - URL -> /api/issues/5
+
+Method -> DELETE - Time -> 5/27/2026, 12:47:08 PM - URL -> /api/issues/5
+
+Method -> DELETE - Time -> 5/27/2026, 12:47:52 PM - URL -> /api/issues/5
+
+Method -> POST - Time -> 5/27/2026, 12:48:31 PM - URL -> /api/auth/login
+
+Method -> DELETE - Time -> 5/27/2026, 12:48:45 PM - URL -> /api/issues/1
