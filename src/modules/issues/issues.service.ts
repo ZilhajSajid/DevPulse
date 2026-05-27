@@ -1,7 +1,8 @@
-import { title } from "process";
 import { pool } from "../../db";
+import type { IAuthUser } from "../auth/auth.interface";
+import type { IIssues, IQueries, IUpdateIssue } from "./issues.interface";
 
-const createIssuesIntoDB = async (payload: any) => {
+const createIssuesIntoDB = async (payload: IIssues) => {
   const { title, description, type, reporter_id } = payload;
   // 1 First check user exists
   const user = await pool.query(
@@ -30,21 +31,21 @@ const createIssuesIntoDB = async (payload: any) => {
   };
 };
 
-const getAllIssuesFromDB = async (query: any) => {
+const getAllIssuesFromDB = async (query: IQueries) => {
   const { sort = "newest", type, status } = query;
-  let sql = `SELECT * FROM issues`;
-  const conditions: string[] = [];
-  const values: string[] = [];
-  if (type) {
-    conditions.push(`type = $${values.length + 1}`);
-    values.push(type as string);
-  }
-  if (status) {
-    conditions.push(`status = $${values.length + 1}`);
-    values.push(status as string);
-  }
-  if (conditions.length > 0) {
-    sql += ` WHERE ${conditions.join(" AND ")}`;
+  let sql = "";
+  let values: string[] = [];
+  if (type && status) {
+    sql = `SELECT * FROM issues WHERE type=$1 AND status=$2`;
+    values = [type, status];
+  } else if (type) {
+    sql = `SELECT * FROM issues WHERE type=$1`;
+    values = [type];
+  } else if (status) {
+    sql = `SELECT * FROM issues WHERE status=$1`;
+    values = [status];
+  } else {
+    sql = `SELECT * FROM issues`;
   }
   if (sort === "oldest") {
     sql += ` ORDER BY created_at ASC`;
@@ -53,44 +54,33 @@ const getAllIssuesFromDB = async (query: any) => {
   }
   const issuesResult = await pool.query(sql, values);
   const issues = issuesResult.rows;
-
   const reporterIds = issues.map((issue) => issue.reporter_id);
-
   const uniqueIds = [...new Set(reporterIds)];
-
-  const usersResult = await pool.query(
+  const userResult = await pool.query(
     `
-      SELECT id, name, role
-      FROM users
-      WHERE id = ANY($1)
-    `,
+    SELECT * FROM users WHERE id=ANY($1)`,
     [uniqueIds],
   );
-
-  const formattedIssues = issues.map((issue) => {
-    const reporter = usersResult.rows.find(
+  const mergedIssuesAndUser = issues.map((issue) => {
+    const reporter = userResult.rows.find(
       (user) => user.id === issue.reporter_id,
     );
-
     return {
       id: issue.id,
       title: issue.title,
       description: issue.description,
       type: issue.type,
       status: issue.status,
-
       reporter: {
         id: reporter?.id,
         name: reporter?.name,
         role: reporter?.role,
       },
-
       created_at: issue.created_at,
       updated_at: issue.updated_at,
     };
   });
-
-  return formattedIssues;
+  return mergedIssuesAndUser;
 };
 
 const getSingleIssueFromDB = async (id: string) => {
@@ -126,7 +116,11 @@ const getSingleIssueFromDB = async (id: string) => {
   };
 };
 
-const updateSingleIssueFromDB = async (payload: any, id: string, user: any) => {
+const updateSingleIssueFromDB = async (
+  payload: IUpdateIssue,
+  id: string,
+  user: IAuthUser,
+) => {
   const issueResult = await pool.query(
     `
     SELECT * FROM issues WHERE id=$1`,

@@ -328,3 +328,61 @@ Method -> DELETE - Time -> 5/27/2026, 12:47:52 PM - URL -> /api/issues/5
 Method -> POST - Time -> 5/27/2026, 12:48:31 PM - URL -> /api/auth/login
 
 Method -> DELETE - Time -> 5/27/2026, 12:48:45 PM - URL -> /api/issues/1
+
+Method -> POST - Time -> 5/27/2026, 12:56:03 PM - URL -> /api/issues
+
+Method -> GET - Time -> 5/27/2026, 3:53:35 PM - URL -> /api/issues/2
+
+Method -> GET - Time -> 5/27/2026, 3:53:41 PM - URL -> /api/issues/3
+
+Method -> GET - Time -> 5/27/2026, 3:53:47 PM - URL -> /api/issues/4
+
+Method -> GET - Time -> 5/27/2026, 4:11:41 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:14:31 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:15:33 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:19:16 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:20:13 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:20:35 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:21:11 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:21:56 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:25:53 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:26:29 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:29:19 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:31:13 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:32:11 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:34:57 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:36:36 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:41:17 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:41:56 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:43:26 PM - URL -> /api/issues?sort=oldest&type=bug&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:43:51 PM - URL -> /api/issues/
+
+Method -> GET - Time -> 5/27/2026, 4:44:06 PM - URL -> /api/issues?sort=newest
+
+Method -> GET - Time -> 5/27/2026, 4:44:14 PM - URL -> /api/issues?sort=oldest
+
+Method -> GET - Time -> 5/27/2026, 4:44:33 PM - URL -> /api/issues?sort=oldest&status=open
+
+Method -> GET - Time -> 5/27/2026, 4:44:48 PM - URL -> /api/issues?sort=oldest&status=open&type=bug
+
+Method -> GET - Time -> 5/27/2026, 4:47:23 PM - URL -> /api/issues?sort=newest
+
+Method -> PATCH - Time -> 5/27/2026, 4:54:33 PM - URL -> /api/issues/2

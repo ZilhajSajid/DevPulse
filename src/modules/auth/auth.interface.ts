@@ -9,3 +9,9 @@ export interface ILoginPayload {
   email: string;
   password: string;
 }
+
+export interface IAuthUser {
+  id: number;
+  name: string;
+  role: "contributor" | "maintainer";
+}

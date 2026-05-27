@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { issuesService } from "./issues.service";
+import type { JwtPayload } from "jsonwebtoken";
 
 const createIssues = async (req: Request, res: Response) => {
   const { title, description, type } = req.body;
@@ -86,7 +87,7 @@ const updateIssue = async (req: Request, res: Response) => {
     const result = await issuesService.updateSingleIssueFromDB(
       req.body,
       id as string,
-      req.user,
+      req.user ,
     );
 
     res.status(200).json({

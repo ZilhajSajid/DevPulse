@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import config from "../config";
 import { pool } from "../db";
+import type { IAuthUser } from "../modules/auth/auth.interface";
 const auth = (...roles: any) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     // console.log(roles);
@@ -16,7 +17,7 @@ const auth = (...roles: any) => {
       const decoded = jwt.verify(
         token as string,
         config.jwt_secret as string,
-      ) as JwtPayload;
+      ) as IAuthUser;
 
       const userData = await pool.query(
         `
